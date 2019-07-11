@@ -1,0 +1,14 @@
+{
+  "welcomeFile": "/CatarisUI5/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "source": "^/CatarisUI5/(.*)$",
+      "target": "$1",
+      "localDir": "webapp"
+    }
+  ]
+}
