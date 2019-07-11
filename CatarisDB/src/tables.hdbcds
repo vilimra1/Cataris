@@ -1,0 +1,144 @@
+namespace Cataris.CatarisDB;
+
+context tables {
+
+    /*@@layout{"layoutInfo":{"x":-756,"y":22.5}}*/
+    entity category {
+        key catnr    : hana.VARCHAR(10);
+            parentnr : hana.VARCHAR(10);
+            name     : hana.VARCHAR(35);
+            order    : hana.TINYINT;
+            active   : Boolean;
+    };
+
+    /*@@layout{"layoutInfo":{"x":-529,"y":22.5}}*/
+    entity material_group {
+        key matkl : hana.VARCHAR(9);
+            wgbez : hana.VARCHAR(60);
+            catnr : hana.VARCHAR(10);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-235,"y":24.5}}*/
+    entity material {
+        key matnr  : hana.VARCHAR(40);
+            maktx  : hana.VARCHAR(40);
+            matkl  : hana.VARCHAR(9);
+            meins  : hana.VARCHAR(3);
+            bstme  : hana.VARCHAR(3);
+            groes  : hana.VARCHAR(32);
+            brgew  : hana.SMALLDECIMAL;
+            ntgew  : hana.SMALLDECIMAL;
+            gewei  : hana.VARCHAR(3);
+            volum  : hana.SMALLINT;
+            voleh  : hana.VARCHAR(3);
+            raube  : hana.VARCHAR(2);
+            tempb  : hana.VARCHAR(2);
+            ean11  : hana.VARCHAR(18);
+            laeng  : hana.SMALLINT;
+            breit  : hana.SMALLINT;
+            hoehe  : hana.SMALLINT;
+            meabm  : hana.VARCHAR(3);
+            datab  : hana.VARCHAR(1);
+            active : Boolean;
+    };
+
+    /*@@layout{"layoutInfo":{"x":-2,"y":28.5}}*/
+    entity mat_attribute {
+        key attnr : hana.VARCHAR(10);
+            matnr : hana.VARCHAR(40);
+            value : hana.VARCHAR(35);
+    };
+
+    /*@@layout{"layoutInfo":{"x":245,"y":28.5}}*/
+    entity attribute {
+        key attnr : hana.VARCHAR(10);
+            name  : hana.VARCHAR(35);
+            meins : hana.VARCHAR(3);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-529,"y":-337.5}}*/
+    entity user {
+        key usernr   : hana.VARCHAR(10);
+            username : hana.VARCHAR(35);
+            password : hana.VARCHAR(10);
+            email    : hana.VARCHAR(60);
+            tel      : hana.VARCHAR(16);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-230,"y":-339.5}}*/
+    entity role_user {
+        key rolenr : hana.VARCHAR(10);
+        key usernr : hana.VARCHAR(10);
+    };
+
+    /*@@layout{"layoutInfo":{"x":45,"y":-337.5}}*/
+    entity role {
+        key rolenr : hana.VARCHAR(10);
+            name   : hana.VARCHAR(35);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-230,"y":-233.5}}*/
+    entity customer {
+        key kunnr  : hana.VARCHAR(10);
+            land1  : hana.VARCHAR(3);
+            name1  : hana.VARCHAR(35);
+            name2  : hana.VARCHAR(35);
+            ort01  : hana.VARCHAR(35);
+            pstlz  : hana.VARCHAR(10);
+            regio  : hana.VARCHAR(3);
+            stras  : hana.VARCHAR(35);
+            telf1  : hana.VARCHAR(16);
+            email  : hana.VARCHAR(60);
+            usernr : hana.VARCHAR(10);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-2,"y":195.5}}*/
+    entity order {
+        key ordernr    : hana.VARCHAR(10);
+            usernr     : hana.VARCHAR(10);
+            amount     : hana.SMALLDECIMAL;
+            currency   : hana.VARCHAR(3);
+            created_at : UTCDateTime;
+    };
+
+    /*@@layout{"layoutInfo":{"x":245,"y":199.5}}*/
+    entity order_items {
+        key ordernr  : hana.VARCHAR(10);
+            item     : hana.SMALLINT;
+            matn     : hana.VARCHAR(40);
+            maktx    : hana.VARCHAR(40);
+            amount   : hana.SMALLDECIMAL;
+            currency : hana.VARCHAR(3);
+            quantity : hana.SMALLINT;
+            meins    : hana.VARCHAR(6);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-766,"y":195.5}}*/
+    entity sbasket {
+        key basketnr   : hana.VARCHAR(10);
+            usernr     : hana.VARCHAR(10);
+            created_at : UTCDateTime;
+            modify_at  : UTCDateTime;
+    };
+
+    /*@@layout{"layoutInfo":{"x":-529,"y":195.5}}*/
+    entity sbasket_item {
+        key basketnr : hana.VARCHAR(10);
+        key item     : hana.SMALLINT;
+            matnr    : hana.VARCHAR(40);
+            quantity : hana.TINYINT;
+            meins    : hana.VARCHAR(6);
+    };
+
+    /*@@layout{"layoutInfo":{"x":-756,"y":-339.5}}*/
+    entity partner {
+        key partnr : hana.VARCHAR(3);
+            name   : hana.VARCHAR(35);
+            land   : hana.VARCHAR(3);
+            street : hana.VARCHAR(35);
+            city   : hana.VARCHAR(35);
+            pstlz  : hana.VARCHAR(10);
+            email  : hana.VARCHAR(60);
+            tel    : hana.VARCHAR(16);
+    };
+};
