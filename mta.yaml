@@ -8,7 +8,7 @@ modules:
     requires:
       - name: hdi_CatarisDB
     parameters:
-      memory: 256M
+      memory: 512M
   - name: CatarisJS
     type: nodejs
     path: CatarisJS
