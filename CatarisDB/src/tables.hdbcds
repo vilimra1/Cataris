@@ -3,11 +3,12 @@ namespace Cataris.CatarisDB;
 context tables {
 
     /*@@layout{"layoutInfo":{"x":-756,"y":22.5}}*/
+
     entity category {
         key catnr    : hana.VARCHAR(10);
             parentnr : hana.VARCHAR(10);
             name     : hana.VARCHAR(35);
-            order    : hana.TINYINT;
+            rank     : hana.TINYINT;
             active   : Boolean;
     };
 
@@ -92,8 +93,8 @@ context tables {
             usernr : hana.VARCHAR(10);
     };
 
-    /*@@layout{"layoutInfo":{"x":-2,"y":195.5}}*/
-    entity order {
+    // /*@@layout{"layoutInfo":{"x":-2,"y":195.5}}*/
+    entity reserve {
         key ordernr    : hana.VARCHAR(10);
             usernr     : hana.VARCHAR(10);
             amount     : hana.SMALLDECIMAL;
@@ -101,7 +102,7 @@ context tables {
             created_at : UTCDateTime;
     };
 
-    /*@@layout{"layoutInfo":{"x":245,"y":199.5}}*/
+    // /*@@layout{"layoutInfo":{"x":245,"y":199.5}}*/
     entity order_items {
         key ordernr  : hana.VARCHAR(10);
             item     : hana.SMALLINT;
