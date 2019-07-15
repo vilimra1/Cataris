@@ -1,53 +1,47 @@
 ID: Cataris
 _schema-version: '2.1'
 version: 0.0.1
-
 modules:
- - name: CatarisDB
-   type: hdb
-   path: CatarisDB
-   requires:
-    - name: hdi_CatarisDB
-
-
- - name: CatarisJS
-   type: nodejs
-   path: CatarisJS
-   provides:
-    - name: CatarisJS_api
-      properties:
-         url: ${default-url}
-
-
- - name: CatarisUI5
-   type: html5
-   path: CatarisUI5
-   parameters:
+  - name: CatarisDB
+    type: hdb
+    path: CatarisDB
+    requires:
+      - name: hdi_CatarisDB
+    parameters:
+      memory: 256M
+  - name: CatarisJS
+    type: nodejs
+    path: CatarisJS
+    provides:
+      - name: CatarisJS_api
+        properties:
+          url: '${default-url}'
+    parameters:
+      memory: 256M
+  - name: CatarisUI5
+    type: html5
+    path: CatarisUI5
+    parameters:
       disk-quota: 256M
       memory: 256M
-   build-parameters:
+    build-parameters:
       builder: grunt
-   requires:
-    - name: uaa_Cataris
-    - name: dest_Cataris
-
+    requires:
+      - name: uaa_Cataris
+      - name: dest_Cataris
 resources:
- - name: hdi_CatarisDB
-   properties:
-      hdi-container-name: ${service-name}
-   type: com.sap.xs.hdi-container
-
- - name: uaa_Cataris
-   parameters:
+  - name: hdi_CatarisDB
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: uaa_Cataris
+    parameters:
       path: ./xs-security.json
       service-plan: application
       service: xsuaa
-   type: org.cloudfoundry.managed-service
-
-
- - name: dest_Cataris
-   parameters:
+    type: org.cloudfoundry.managed-service
+  - name: dest_Cataris
+    parameters:
       service-plan: lite
       service: destination
-   type: org.cloudfoundry.managed-service
-
+    type: org.cloudfoundry.managed-service
