@@ -41,4 +41,30 @@ router.get('/', function (req, res) {
 	//res.render('index', { title: 'Express' });
 });
 
+router.post('/users', function (req, res) {
+    var data = req.body;
+
+    var hash = crypto.createHash('sha256');
+    hash.update(data.password);
+    var pwdhsh = hash.digest('hex');
+
+    var user = { "usernr": data.usernr, "username": data.username, "password": data.password, "email": data.email, "tel": data.tel };
+
+    client.exec("INSERT INTO \"CATARIS_HDI_CATARISDB_1\".\"Cataris.CatarisDB::tables.user\" VALUES('" + user.usernr + "', '" + user.username + "', '" + user.password + "', '" + user.email + "', '" + user.tel + "');", function (err, affectedRows) {
+        if (err) {
+            res.send(err);
+        }
+        res.send(user);
+    });
+
+
+
+    /*client.exec('SELECT TOP 1000 \"usernr\",\"username\",\"password\",\"email\", \"tel\" FROM \"CATARIS_HDI_CATARISDB_1\".\"Cataris.CatarisDB::tables.user\";', function (err, rows) {
+        if (err) {
+            return console.error('Error:', err);
+        }
+        res.send(rows);
+    });*/
+    //res.render('index', { title: 'Express' });
+});
 module.exports = router;
