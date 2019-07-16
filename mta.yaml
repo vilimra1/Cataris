@@ -18,6 +18,15 @@ modules:
           url: '${default-url}'
     parameters:
       memory: 256M
+  - name: CatarisJSManagement
+    type: nodejs
+    path: CatarisJSManagement
+    provides:
+      - name: CatarisJSManagement_api
+        properties:
+          url: '${default-url}'
+    parameters:
+      memory: 256M
   - name: CatarisUI5
     type: html5
     path: CatarisUI5
